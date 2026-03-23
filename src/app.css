@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap');
+
+body {
+    margin: 0;
+}
+
+h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 16vw, 9rem);
+    color: #f0ece4;
+    line-height: 0.9;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    letter-spacing: 0.01em;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+    background: #dc3c3c;
+    color: #fff;
+}
+
+.btn-primary:hover { opacity: 0.85; }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-ghost {
+    background: rgba(240, 236, 228, 0.06);
+    color: rgba(240, 236, 228, 0.6);
+    border: 1px solid rgba(240, 236, 228, 0.1);
+}
+
+.btn-ghost:hover {
+    background: rgba(240, 236, 228, 0.1);
+    color: rgba(240, 236, 228, 0.85);
+}
+
+.btn-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+}
