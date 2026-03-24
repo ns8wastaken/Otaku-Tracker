@@ -1,22 +1,9 @@
-<script lang="ts">
-    import { X } from 'lucide-svelte';
+<script lang='ts'>
     import { MediaType, Status, Rating } from '../types/media';
     import { appState } from '../state.svelte';
+    import BaseModal from './BaseModal.svelte';
 
     let { open = $bindable() }: { open: boolean; } = $props();
-
-    let dialog: HTMLDialogElement;
-    let closing = $state(false);
-
-    $effect(() => {
-        if (open) dialog?.showModal();
-        else dialog?.close();
-    });
-
-    function closeModal() {
-        closing = true;
-        setTimeout(() => { closing = false; open = false; }, 150);
-    }
 
     // — Counts
     const manga = $derived(appState.entries.filter(e => e.type === MediaType.Manga));
@@ -76,180 +63,109 @@
     const mostReadAnime = $derived([...anime].sort((a, b) => b.progress - a.progress).slice(0, 3));
 </script>
 
-<dialog bind:this={dialog} class:closing onclose={closeModal}>
-    <div class="header">
-        <h2>Stats</h2>
-        <button class="close-btn" onclick={closeModal}><X size={16} /></button>
-    </div>
-
-    <div class="body">
-
-        <div class="time-hero">
-            <div class="time-block">
-                <span class="time-val">{formatTime(totalMinutes)}</span>
-                <span class="time-label">Total time wasted</span>
+<BaseModal bind:open={open} title={'Stats'}>
+    <div class='body'>
+        <div class='time-hero'>
+            <div class='time-block'>
+                <span class='time-val'>{formatTime(totalMinutes)}</span>
+                <span class='time-label'>Total time wasted</span>
             </div>
-            <div class="time-split">
-                <div class="time-sub">
+            <div class='time-split'>
+                <div class='time-sub'>
                     <span>{formatTime(mangaMinutes)}</span>
-                    <span class="dim">Manga <span class="muted">({chaptersRead} ch)</span></span>
+                    <span class='dim'>Manga <span class='muted'>({chaptersRead} ch)</span></span>
                 </div>
-                <div class="time-div"></div>
-                <div class="time-sub">
+                <div class='time-div'></div>
+                <div class='time-sub'>
                     <span>{formatTime(animeMinutes)}</span>
-                    <span class="dim">Anime <span class="muted">({episodesRead} ep)</span></span>
+                    <span class='dim'>Anime <span class='muted'>({episodesRead} ep)</span></span>
                 </div>
             </div>
         </div>
 
-        <div class="section-title">Overview</div>
-        <div class="grid-4">
-            <div class="stat-card">
-                <span class="sv">{appState.entries.length}</span>
-                <span class="sl">Total</span>
+        <div class='section-title'>Overview</div>
+        <div class='grid-4'>
+            <div class='stat-card'>
+                <span class='sv'>{appState.entries.length}</span>
+                <span class='sl'>Total</span>
             </div>
-            <div class="stat-card">
-                <span class="sv">{manga.length}</span>
-                <span class="sl">Manga</span>
+            <div class='stat-card'>
+                <span class='sv'>{manga.length}</span>
+                <span class='sl'>Manga</span>
             </div>
-            <div class="stat-card">
-                <span class="sv">{anime.length}</span>
-                <span class="sl">Anime</span>
+            <div class='stat-card'>
+                <span class='sv'>{anime.length}</span>
+                <span class='sl'>Anime</span>
             </div>
-            <div class="stat-card">
-                <span class="sv" style="color:#22c55e">{completionRate}%</span>
-                <span class="sl">Completed</span>
+            <div class='stat-card'>
+                <span class='sv' style='color:#22c55e'>{completionRate}%</span>
+                <span class='sl'>Completed</span>
             </div>
         </div>
 
-        <div class="section-title">By Status</div>
-        <div class="status-list">
+        <div class='section-title'>By Status</div>
+        <div class='status-list'>
             {#each statusCounts as s}
-                <div class="status-row">
-                    <span class="status-dot" style="background:{s.color}"></span>
-                    <span class="status-label">{s.label}</span>
-                    <div class="bar-wrap">
+                <div class='status-row'>
+                    <span class='status-dot' style='background:{s.color}'></span>
+                    <span class='status-label'>{s.label}</span>
+                    <div class='bar-wrap'>
                         <div
-                            class="bar"
-                            style="width:{appState.entries.length ? (s.count / appState.entries.length) * 100 : 0}%; background:{s.color}"
+                            class='bar'
+                            style='width:{appState.entries.length ? (s.count / appState.entries.length) * 100 : 0}%; background:{s.color}'
                         ></div>
                     </div>
-                    <span class="status-count">{s.count}</span>
+                    <span class='status-count'>{s.count}</span>
                 </div>
             {/each}
         </div>
 
-        <div class="section-title">By Rating</div>
-        <div class="rating-list">
+        <div class='section-title'>By Rating</div>
+        <div class='rating-list'>
             {#each ratingCounts as r}
-                <div class="status-row">
-                    <span class="status-label" style="text-transform:capitalize">{r.label}</span>
-                    <div class="bar-wrap">
+                <div class='status-row'>
+                    <span class='status-label' style='text-transform:capitalize'>{r.label}</span>
+                    <div class='bar-wrap'>
                         <div
-                            class="bar"
-                            style="width:{appState.entries.length ? (r.count / appState.entries.length) * 100 : 0}%; background:#dc3c3c"
+                            class='bar'
+                            style='width:{appState.entries.length ? (r.count / appState.entries.length) * 100 : 0}%; background:#dc3c3c'
                         ></div>
                     </div>
-                    <span class="status-count">{r.count}</span>
+                    <span class='status-count'>{r.count}</span>
                 </div>
             {/each}
         </div>
 
         {#if mostReadManga.length}
-            <div class="section-title">Most Read Manga</div>
-            <div class="top-list">
+            <div class='section-title'>Most Read Manga</div>
+            <div class='top-list'>
                 {#each mostReadManga as e, i}
-                    <div class="top-row">
-                        <span class="top-num">{i + 1}</span>
-                        <span class="top-title">{e.title}</span>
-                        <span class="top-val">{e.progress} ch</span>
+                    <div class='top-row'>
+                        <span class='top-num'>{i + 1}</span>
+                        <span class='top-title'>{e.title}</span>
+                        <span class='top-val'>{e.progress} ch</span>
                     </div>
                 {/each}
             </div>
         {/if}
 
         {#if mostReadAnime.length}
-            <div class="section-title">Most Watched Anime</div>
-            <div class="top-list">
+            <div class='section-title'>Most Watched Anime</div>
+            <div class='top-list'>
                 {#each mostReadAnime as e, i}
-                    <div class="top-row">
-                        <span class="top-num">{i + 1}</span>
-                        <span class="top-title">{e.title}</span>
-                        <span class="top-val">{e.progress} ep</span>
+                    <div class='top-row'>
+                        <span class='top-num'>{i + 1}</span>
+                        <span class='top-title'>{e.title}</span>
+                        <span class='top-val'>{e.progress} ep</span>
                     </div>
                 {/each}
             </div>
         {/if}
 
     </div>
-</dialog>
+</BaseModal>
 
 <style>
-    dialog {
-        background: #111118;
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 10px;
-        width: 100%;
-        max-width: 520px;
-        max-height: 85vh;
-        overflow-y: auto;
-        font-family: 'DM Sans', sans-serif;
-        color: #f0ece4;
-        padding: 0;
-    }
-
-    dialog::backdrop {
-        background: rgba(0,0,0,0.75);
-        backdrop-filter: blur(4px);
-        animation: fadeIn 0.2s ease both;
-    }
-
-    dialog[open] { animation: slideUp 0.2s ease both; }
-    dialog[open].closing { animation: slideDown 0.15s ease both; }
-    dialog[open].closing::backdrop { animation: slideDown 0.15s ease both; }
-
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(16px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideDown {
-        from { opacity: 1; transform: translateY(0); }
-        to   { opacity: 0; transform: translateY(16px); }
-    }
-
-    .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1.25rem 1.25rem 0;
-        position: sticky;
-        top: 0;
-        background: #111118;
-        z-index: 1;
-    }
-
-    h2 {
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 1.4rem;
-        margin: 0;
-        letter-spacing: 0.03em;
-    }
-
-    .close-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 28px;
-        height: 28px;
-        border-radius: 4px;
-        border: none;
-        background: transparent;
-        color: rgba(240,236,228,0.4);
-        cursor: pointer;
-        transition: color 0.15s;
-    }
-    .close-btn:hover { color: #f0ece4; }
-
     .body {
         padding: 1.25rem;
         display: flex;

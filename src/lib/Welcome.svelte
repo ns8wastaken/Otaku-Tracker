@@ -56,7 +56,6 @@
             </button>
             <ConfirmModal
                 bind:open={confirmOpen}
-                title='Start Fresh'
                 message='This will wipe all data from your previous session and cannot be undone.'
                 confirmLabel='Start fresh'
                 onConfirm={onNew}

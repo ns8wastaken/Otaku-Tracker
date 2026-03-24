@@ -6,14 +6,6 @@ install:
 dev:
     npm run dev
 
-typecheck:
-    npm run typecheck
-
-lint:
-    npm run lint
-
-check: lint typecheck build
-
 build:
     npm run build
 

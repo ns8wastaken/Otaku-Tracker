@@ -5,7 +5,7 @@
     import { Status, MediaType, Rating } from '../types/media';
     import * as DB from '../services/db';
     import { exportData } from '../features/importExport';
-    import Modal from './Modal.svelte';
+    import EntryModal from './EntryModal.svelte';
     import Dropdown from './Dropdown.svelte';
     import { Sorting } from '../types/trackerview';
     import { appState } from '../state.svelte';
@@ -147,7 +147,7 @@
 </script>
 
 <StatsModal bind:open={statsModalOpen} />
-<Modal bind:open={modalOpen} entry={modalEntry} onSave={handleSave} onDelete={handleDelete} />
+<EntryModal bind:open={modalOpen} entry={modalEntry} onSave={handleSave} onDelete={handleDelete} />
 
 <div class='tracker'>
     <div class='topbar'>
