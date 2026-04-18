@@ -3,7 +3,7 @@ export const Status = {
     Completed: 'completed',
     OnHold:    'onhold',
     Dropped:   'dropped',
-    ToRead:    'toread',
+    ToWatch:   'towatch',
 } as const;
 
 export const MediaType = {

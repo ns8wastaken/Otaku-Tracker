@@ -1,6 +1,6 @@
 <script lang='ts'>
-    import { MediaType, Status, Rating } from '../types/media';
-    import { appState } from '../state.svelte';
+    import { MediaType, Status, Rating } from '../../types/media';
+    import { appState } from '../../state.svelte';
     import BaseModal from './BaseModal.svelte';
 
     let { open = $bindable() }: { open: boolean; } = $props();
@@ -43,7 +43,7 @@
         { value: Status.Completed, label: 'Completed',  color: '#22c55e' },
         { value: Status.OnHold,    label: 'On Hold',    color: '#f59e0b' },
         { value: Status.Dropped,   label: 'Dropped',    color: '#ef4444' },
-        { value: Status.ToRead,    label: 'To Read',    color: '#a78bfa' },
+        { value: Status.ToWatch,   label: 'To Watch',   color: '#a78bfa' },
     ];
 
     const statusCounts = $derived(

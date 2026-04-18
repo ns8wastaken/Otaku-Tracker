@@ -1,9 +1,9 @@
 <script lang='ts'>
     import BaseModal from './BaseModal.svelte';
     import { Trash2 } from 'lucide-svelte';
-    import { Status, MediaType, Rating, createEntry, updateEntry } from '../types/media';
-    import type { TrackedMedia } from '../types/media';
-    import Dropdown from './Dropdown.svelte';
+    import { Status, MediaType, Rating, createEntry, updateEntry } from '../../types/media';
+    import type { TrackedMedia } from '../../types/media';
+    import Dropdown from '../Dropdown.svelte';
 
     let { open = $bindable(), entry, onSave, onDelete }: {
         open: boolean;
@@ -63,7 +63,7 @@
     const statusOptions = $derived([
         { label: `${statusUnit}ing`, value: Status.Watching },
         { label: 'Completed',        value: Status.Completed },
-        { label: `To ${statusUnit}`, value: Status.ToRead },
+        { label: `To ${statusUnit}`, value: Status.ToWatch },
         { label: 'On Hold',          value: Status.OnHold },
         { label: 'Dropped',          value: Status.Dropped },
     ]);

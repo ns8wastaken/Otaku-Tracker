@@ -1,9 +1,17 @@
 <script lang="ts">
     import { importData, ImportMode } from './features/importExport';
-    import TrackerView from './lib/TrackerView.svelte';
-    import Welcome from './lib/Welcome.svelte';
+    import TrackerView from './components/TrackerView.svelte';
+    import Welcome from './components/Welcome.svelte';
     import * as DB from './services/db';
     import { appState, View } from './state.svelte';
+    import { onMount } from 'svelte';
+
+    onMount(async () => {
+        appState.entries = await DB.getAll();
+        if (appState.entries.length > 0) {
+            appState.view = View.Tracker;
+        }
+    });
 
     async function handleOpen(file: File) {
         await importData(file, ImportMode.Replace);

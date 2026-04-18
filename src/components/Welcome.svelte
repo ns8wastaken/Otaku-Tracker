@@ -1,6 +1,6 @@
 <script lang='ts'>
     import { FolderOpen, StepForward, TriangleAlert } from 'lucide-svelte';
-    import ConfirmModal from './ConfirmModal.svelte';
+    import ConfirmModal from './modal/ConfirmModal.svelte';
 
     let { onOpen, onContinue, onNew }: {
         onOpen:     (file: File) => void;
@@ -20,7 +20,7 @@
     }
 
     const taglines = [
-        'Top 10% gooner activities.',
+        'Top 1% gooner activities.',
         'No bitches?',
         'Anime waifu body pillow go brrrr!',
     ];
@@ -177,8 +177,9 @@
     .how {
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 1rem;
-        width: 100%;
+        width: fit-content;
         animation: fadeDown 0.6s 0.4s ease both;
     }
 
@@ -190,6 +191,8 @@
         border-radius: 6px;
         background: rgba(255,255,255,0.03);
         border: 1px solid rgba(255,255,255,0.05);
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .step-num {
