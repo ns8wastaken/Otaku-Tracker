@@ -1,6 +1,7 @@
 <script lang='ts'>
     import { FolderOpen, StepForward, TriangleAlert } from 'lucide-svelte';
     import ConfirmModal from './modal/ConfirmModal.svelte';
+    import { taglines } from '../constants/welcome';
 
     let { onOpen, onContinue, onNew }: {
         onOpen:     (file: File) => void;
@@ -19,11 +20,6 @@
         if (file) onOpen(file);
     }
 
-    const taglines = [
-        'Top 1% gooner activities.',
-        'No bitches?',
-        'Anime waifu body pillow go brrrr!',
-    ];
     const tagline = taglines[Math.floor(Math.random() * taglines.length)];
 
     let confirmOpen = $state(false);
@@ -72,15 +68,15 @@
         <div class='how'>
             <div class='step'>
                 <span class='step-num'>01</span>
-                <span class='step-text'>Open or create a <code>tracker.json</code> file on your computer.</span>
+                <span class='step-text'>Be a gooner</span>
             </div>
             <div class='step'>
                 <span class='step-num'>02</span>
-                <span class='step-text'>Track anime &amp; manga with progress, scores, and notes.</span>
+                <span class='step-text'>Track anime &amp; manga with progress and rating.</span>
             </div>
             <div class='step'>
                 <span class='step-num'>03</span>
-                <span class='step-text'>Export the list again or keep it saved on the browser.</span>
+                <span class='step-text'>Export the list or keep it saved on the browser.</span>
             </div>
         </div>
     </div>
@@ -208,14 +204,6 @@
         color: rgba(240, 236, 228, 0.45);
         line-height: 1.6;
         font-weight: 300;
-    }
-
-    code {
-        font-size: 0.82rem;
-        background: rgba(220, 60, 60, 0.15);
-        color: #dc3c3c;
-        padding: 1px 5px;
-        border-radius: 3px;
     }
 
     @keyframes fadeDown {
