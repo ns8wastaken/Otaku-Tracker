@@ -247,11 +247,6 @@
         font-size: 0.82rem;
     }
 
-    input[type='number']::outer-spin-button,
-    input[type='number']::inner-spin-button {
-        appearance: none;
-        margin: 0;
-    }
     input[type='number'] {
         appearance: textfield;
     }
